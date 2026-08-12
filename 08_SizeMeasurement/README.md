@@ -1,5 +1,8 @@
 # SizeMeasurement — 第 8 章 尺寸量測 範例程式
 
+Medium 文章連結 : https://medium.com/@GarnettChien/aoi-8-%E5%B0%BA%E5%AF%B8%E9%87%8F%E6%B8%AC-b7cdb7885e5a
+
+
 《AOI 工程師養成教材》第 8 章的隨堂範例。用最小可執行的 WinForms 程式，把尺寸量測的四件事跑給你看：
 **標定（mm/px）**、**線段量測（亞像素邊緣）**、**點位量測（距離與角度）**、**統計（平均值與標準差）**。
 
