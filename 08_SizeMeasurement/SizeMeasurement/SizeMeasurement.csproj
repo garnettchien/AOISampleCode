@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  第 8 章 尺寸量測 — 範例專案
+
+  技術棧依第 14 章《技術棧與規範》鎖定，與第 7 章 FeatureDetection 完全一致：
+    .NET Framework 4.7.2 ／ C# 6.0 ／ 舊式（非 SDK-style）專案檔
+
+  影像函式庫 Emgu.CV 選用 4.4.0.4099 而非最新版，理由同第 14 章的 NuGet 檢查規則：
+    · 4.4.0.4099  → build\Emgu.CV.runtime.windows.targets，第一行含
+                    xmlns="http://schemas.microsoft.com/developer/msbuild/2003"  → 可用
+    · 4.12.0.5764 → 無 .targets，只有 runtimes\ 資料夾（SDK-style RID 資產） → 不可用
+  該 .targets 會把 cvextern.dll 等 native DLL 複製到輸出目錄的 x64\ 子資料夾。
+-->
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{680CE4AD-B8A8-478E-8298-9C1BE84072BF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SizeMeasurement</RootNamespace>
+    <AssemblyName>SizeMeasurement</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <!-- 第 14 章：鎖定 C# 6.0，讓編譯器直接擋掉 tuple / pattern matching 等 C# 7.0+ 語法 -->
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <!-- cvextern.dll 走 x64，行程位元數必須固定為 64 位元（不可用 AnyCPU + Prefer32Bit） -->
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Emgu.CV" Version="4.4.0.4099" />
+    <PackageReference Include="Emgu.CV.Bitmap" Version="4.4.0.4099" />
+    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.4.0.4099" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Calibration.cs" />
+    <Compile Include="MeasureOps.cs" />
+    <Compile Include="TestImageGenerator.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
