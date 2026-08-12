@@ -1,5 +1,7 @@
 # FeatureDetection — 第 7 章 特徵檢測 範例程式
 
+Medium文章連結 : https://medium.com/@GarnettChien/aoi-7-%E7%89%B9%E5%BE%B5%E6%AA%A2%E6%B8%AC-f604c0dc0bba?postPublishedType=repub
+
 《AOI 工程師養成教材》第 7 章的隨堂範例。用最小可執行的 WinForms 程式，把四個特徵檢測工具跑給你看：
 **ROI 感興趣區域**、**Blob 連通域分析**、**Canny 邊緣檢測**、**像素計數**。
 
