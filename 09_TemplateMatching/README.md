@@ -1,5 +1,8 @@
 # TemplateMatching — 第 9 章 模板匹配與定位 範例程式
 
+Medium文章連結 : https://medium.com/@GarnettChien/aoi-9-%E6%A8%A1%E6%9D%BF%E5%8C%B9%E9%85%8D%E8%88%87%E5%AE%9A%E4%BD%8D-%E5%BD%B1%E5%83%8F%E5%B0%8D%E4%BD%8D-3c1d478a44ac?postPublishedType=repub
+
+
 《AOI 工程師養成教材》第 9 章的隨堂範例。用最小可執行的 WinForms 程式，示範 AOI 定位的完整流程：
 **教導模板 → 設搜尋區 → 定位 → 算偏移量 → 套用到所有後續 ROI**。
 
