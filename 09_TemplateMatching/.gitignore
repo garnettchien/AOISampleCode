@@ -1,0 +1,27 @@
+# ── 建置產物 ────────────────────────────────────────────────
+# 這兩個目錄務必排除：Emgu.CV 的 .targets 會把原生 DLL 複製進去，
+# 光是 cvextern.dll 就 34 MB，bin\ 整個超過 200 MB。
+# 這些檔案由 NuGet 還原時自動取得，不需要進版控。
+[Bb]in/
+[Oo]bj/
+
+# ── Visual Studio 使用者設定與快取 ──────────────────────────
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ── NuGet ───────────────────────────────────────────────────
+# 本專案用 PackageReference，套件還原到全域快取，不會有 packages\；
+# 保留這幾條是為了避免有人切回 packages.config 時誤加入。
+packages/
+*.nupkg
+project.lock.json
+project.assets.json
+
+# ── 其他 ────────────────────────────────────────────────────
+*.cache
+*.log
+Thumbs.db
+desktop.ini
